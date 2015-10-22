@@ -21,40 +21,40 @@
             </ui:define>
 
             <ui:define name="content">
-        <h1>Operations bancaires du compte No #{param.id}:</h1>
-        <f:view>
-            <h:form>
-                <h1><h:outputText value="List"/></h1>
-                <h:dataTable value="#{operationsBancairesMBean.operationsBancaires}" var="item">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Dateoperation"/>
-                        </f:facet>
-                        <h:outputText value="#{item.dateoperation}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Description"/>
-                        </f:facet>
-                        <h:outputText value="#{item.description}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Montant"/>
-                        </f:facet>
-                        <h:outputText value="#{item.montant}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Id"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
-        </f:view>
+                <h1>Operations bancaires du compte No #{param.id}:</h1>
+                <f:view>
+                    <h:form>
+                        <h1><h:outputText value="List"/></h1>
+                        <h:dataTable value="#{operationsBancairesMBean.operationsBancaires}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Dateoperation"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dateoperation}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Description"/>
+                                </f:facet>
+                                <h:outputText value="#{item.description}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Montant"/>
+                                </f:facet>
+                                <h:outputText value="#{item.montant}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Id"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </f:view>
             </ui:define>
 
         </ui:composition>

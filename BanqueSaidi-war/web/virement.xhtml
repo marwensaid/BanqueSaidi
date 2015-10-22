@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./TemplatePrincipal.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+                    <h:form id="form">
+                        <p:panel id="panel" header=" Virement Bancaire" style="margin-bottom:10px;">  
+
+                            <p:messages id="messages" /> 
+                            <h:panelGrid columns="2">
+
+                                <h:outputLabel value="Compte à débiter : " for="crediteur" />
+                                <p:selectOneMenu id="crediteur" value="#{compteBean.idDebiteur}"  required="true">
+                                    <c:forEach var="item" items="#{compteBean.comptes}" >
+                                        <f:selectItem itemLabel="#{item.client.nom} #{item.client.prenom} - Compte n° #{item.id}" itemValue="#{item.id}"/>
+                                    </c:forEach>
+                                </p:selectOneMenu>
+
+                                <h:outputLabel value="Compte à créditer : " for="debiteur" />
+                                <p:selectOneMenu id="debiteur" value="#{compteBean.idCrediteur}" required="true">
+                                    <c:forEach var="item" items="#{compteBean.comptes}" >
+                                        <f:selectItem itemLabel="#{item.client.nom} #{item.client.prenom}  - Compte n° #{item.id}" itemValue="#{item.id}"/>
+                                    </c:forEach>
+                                </p:selectOneMenu>
+
+
+
+                                <h:outputLabel value="Montant : " for="montant"/>
+
+                                <p:spinner id="montant" value="#{compteBean.montant}" prefix="€" 
+                                           requiredMessage="Veuillez saisir le montant" required="true" min="0"/>  
+                            </h:panelGrid>
+                        </p:panel>
+
+                        <h:panelGrid columns="2">
+                            <p:commandButton id="valider" value="Valider" update="panel" action="#{compteBean.transfertMontant}" process="@form" />  
+                            <p:commandButton id="back" value="Retour" action="#{compteBean.list()}"/> 
+                        </h:panelGrid>
+                    </h:form>
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

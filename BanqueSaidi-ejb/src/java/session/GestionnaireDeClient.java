@@ -49,7 +49,8 @@ public class GestionnaireDeClient {
     public void createClient(String nom, String prenom, Date date, String adresse, String telephone, String mail, double solde) {
         Client client = new Client(nom, prenom, date, adresse, telephone, mail);
 
-        CompteBancaire compte = new CompteBancaire(nom, solde) {};
+        CompteBancaire compte = new CompteBancaire(nom, solde) {
+        };
 
         OperationBancaire operation = new OperationBancaire("Création du compte", solde);
         compte.getOperations().add(operation);

@@ -46,10 +46,10 @@ public class OperationBancaireMBean {
      * Creates a new instance of OperationBancaireMBean
      */
     public OperationBancaireMBean() {
-                System.out.println("NEW OperationsBancairesMBean");
+        System.out.println("NEW OperationsBancairesMBean");
 
     }
-    
+
     public List<OperationBancaire> getOperationsBancaires() {
         return gc.getOperationsBancaires(idCompte);
     }

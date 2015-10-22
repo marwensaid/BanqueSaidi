@@ -1,4 +1,4 @@
-    <?xml version='1.0' encoding='UTF-8' ?> 
+<?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -19,7 +19,12 @@
         </div>
         <div>
             <div id="left">
-                <ui:insert name="left">Left</ui:insert>
+                <ul>
+                    <li><h:link outcome="index.xhtml" value="Accueil" /></li>
+                    <li><h:link outcome="listeComptes.xhtml" value="Liste des comptes"/></li> 
+                    <li><h:link outcome="ajoutClient.xhtml" value="Ajouter client"/></li> 
+                    <li><h:link outcome="virement.xhtml" value="Virement bancaire" /></li> 
+                </ul>
             </div>
             <div id="content" class="left_content">
                 <ui:insert name="content">Content</ui:insert>

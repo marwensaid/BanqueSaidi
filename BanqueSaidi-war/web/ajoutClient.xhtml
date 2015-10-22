@@ -1,12 +1,62 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
+    <body>
+
+        <ui:composition template="./TemplatePrincipal.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+                    <h:form>
+                        <p:panel id="panel" header="Ajouter un nouveau client" style="margin-bottom:10px;">  
+
+                            <p:messages id="messages" /> 
+                            <h:panelGrid columns="2">
+
+                                <h:outputLabel value="Nom:" for="nom" />
+                                <p:inputText id="nom" value="#{clientBean.nom}" title="Nom" required="true"
+                                             requiredMessage="Veuillez saisir le nom" />
+
+                                <h:outputLabel value="Prénom :" for="prenom" />
+                                <p:inputText id="prenom" value="#{clientBean.prenom}" title="Prenom" required="true"
+                                             requiredMessage="Veuillez saisir le prénom" />
+
+                                <h:outputText value="Date de naissance: " />  
+                                <p:calendar value="#{clientBean.dateNaiss}" id="popupButtonCal" showOn="button" /> 
+
+                                <h:outputLabel value="Adresse :" for="adresse" />
+                                <p:inputText id="adresse" value="#{clientBean.adresse}" title="Adresse" />
+
+                                <h:outputLabel value="Téléphone :" for="telephone" />
+                                <p:inputText id="telephone" value="#{clientBean.telephone}" title="telephone" required="true"
+                                             requiredMessage="Veuillez saisir le numéro de téléphone"/>
+
+                                <h:outputLabel value="Email :" for="mail" />
+                                <p:inputText id="mail" value="#{clientBean.mail}" title="mail" />
+
+                                <h:outputLabel value="Solde:" for="solde" />
+                                <p:spinner id="solde" value="#{clientBean.solde}" prefix="€" required="true"
+                                           requiredMessage="Veuillez saisir le solde" />  
+
+
+                            </h:panelGrid>
+                        </p:panel>
+
+                        <h:panelGrid columns="2">
+                            <p:commandButton id="c" value="Valider" action="#{clientBean.creerClient}"/>
+                            <p:commandButton id="retour" value="Retour" action="#{compteBean.list()}"/>
+                        </h:panelGrid>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

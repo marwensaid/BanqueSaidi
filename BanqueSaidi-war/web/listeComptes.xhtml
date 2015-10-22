@@ -1,12 +1,73 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
+    <body >
+
+        <ui:composition template="./DefaultTemplate.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+                    <h:form >
+
+                        <p:confirmDialog widgetVar="deleteDlg" id="deleteDialog" header="Suppression" message="Êtes-vous sûr de vouloir supprimer ce compte ?"
+                                         width="400" closable="false" severity="alert">
+                            <p:growl id="messages" sticky="false" />          
+
+                            <h:panelGroup layout="block" style="text-align: right">
+                                <p:commandButton value="Oui" action="#{compteBean.suppression()}" oncomplete="deleteDlg.hide();"
+                                                 update="messages cTable" />
+                                <p:commandButton value="Non" onclick="deleteDlg.hide();" />
+
+                            </h:panelGroup>
+                        </p:confirmDialog>
+
+
+                        <p:dataTable  id="cTable" value="#{compteBean.modele}" var="item" paginator="true" rows="5" lazy="true"
+                                      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                                      rowsPerPageTemplate="5,10,15"
+                                      rowStyleClass="#{compteBean.colorow(item.solde)}"
+                                      emptyMessage="Aucun compte bancaire trouvé." >
+
+
+                            <p:column headerText="N° de compte">                                                        
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>                               
+
+                            <p:column headerText="Client">
+                                <h:outputText value="#{item.client.nom} #{item.client.prenom}"/> 
+                            </p:column>
+
+                            <p:column headerText="Solde" sortBy="#{item.solde}">
+                                <h:outputText value="#{item.solde}">
+                                    <f:convertNumber currencySymbol="€" groupingUsed="#{true}" maxFractionDigits="2" type="currency"/>
+                                </h:outputText>                                             
+                            </p:column>
+
+                            <p:column headerText="Historique">
+                                <p:commandButton action="#{compteBean.showDetails(item)}" icon="ui-icon-search"/>                                  
+                            </p:column>
+
+                            <p:column headerText="Opérations">
+                                <p:commandButton action="#{compteBean.operation(item)}" icon="ui-icon-pencil"/>                                  
+                            </p:column>
+
+                            <p:column headerText="Suppression" style="width: 20px">
+                                <p:commandLink oncomplete="deleteDlg.show();">
+                                    <h:panelGroup styleClass="ui-icon ui-icon-trash" />
+                                    <f:setPropertyActionListener value="#{item}" target="#{compteBean.compte}" />
+                                </p:commandLink>                 
+                            </p:column>      
+
+                        </p:dataTable>                                                                                   
+                    </h:form>           
+                </f:view>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

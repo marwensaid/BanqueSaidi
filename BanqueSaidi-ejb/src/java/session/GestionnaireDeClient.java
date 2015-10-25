@@ -46,7 +46,7 @@ public class GestionnaireDeClient {
         return query.getResultList();
     }
 
-    public void createClient(String nom, String prenom, Date date, String adresse, String telephone, String mail, double solde) {
+    public void creerClient(String nom, String prenom, Date date, String adresse, String telephone, String mail, double solde) {
         Client client = new Client(nom, prenom, date, adresse, telephone, mail);
 
         CompteBancaire compte = new CompteBancaire(nom, solde) {
@@ -92,11 +92,11 @@ public class GestionnaireDeClient {
      * @throws java.text.ParseException
      */
     public void creerClientTest() throws ParseException {
-        createClient("John", "Lennon", simpleDateFormat.parse("1940/10/09"), "Nice", "06200200", "john@beatles.com", 150000);
-        createClient("Paul", "Mac Cartney", simpleDateFormat.parse("1942/09/18"), "Paris", "07800800", "paul@beatles.com", 950000);
-        createClient("Ringo", "Starr", simpleDateFormat.parse("1940/07/07"), "Londre", "06333980", "ringo@beatles.com", 20000);
-        createClient("Georges", "Harrisson", simpleDateFormat.parse("1943/02/25"), "Paris", "07966098", "georges@beatles.com", 100000);
-        createClient("Hala", "Ghoualmi", simpleDateFormat.parse("1988/01/13"), "Nice", "07218218", "hala@beatles.ca", 123000);
+        creerClient("John", "Lennon", simpleDateFormat.parse("1940/10/09"), "Nice", "06200200", "john@beatles.com", 150000);
+        creerClient("Paul", "Mac Cartney", simpleDateFormat.parse("1942/09/18"), "Paris", "07800800", "paul@beatles.com", 950000);
+        creerClient("Ringo", "Starr", simpleDateFormat.parse("1940/07/07"), "Londre", "06333980", "ringo@beatles.com", 20000);
+        creerClient("Georges", "Harrisson", simpleDateFormat.parse("1943/02/25"), "Paris", "07966098", "georges@beatles.com", 100000);
+        creerClient("Hala", "Ghoualmi", simpleDateFormat.parse("1988/01/13"), "Nice", "07218218", "hala@beatles.ca", 123000);
 
     }
 

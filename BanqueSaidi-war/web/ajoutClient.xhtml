@@ -19,28 +19,28 @@
                             <h:panelGrid columns="2">
 
                                 <h:outputLabel value="Nom:" for="nom" />
-                                <p:inputText id="nom" value="#{clientBean.nom}" title="Nom" required="true"
+                                <p:inputText id="nom" value="#{clientMBean.nom}" title="Nom" required="true"
                                              requiredMessage="Veuillez saisir le nom" />
 
                                 <h:outputLabel value="Prénom :" for="prenom" />
-                                <p:inputText id="prenom" value="#{clientBean.prenom}" title="Prenom" required="true"
+                                <p:inputText id="prenom" value="#{clientMBean.prenom}" title="Prenom" required="true"
                                              requiredMessage="Veuillez saisir le prénom" />
 
                                 <h:outputText value="Date de naissance: " />  
-                                <p:calendar value="#{clientBean.dateNaiss}" id="popupButtonCal" showOn="button" /> 
+                                <p:calendar value="#{clientMBean.dateNaiss}" id="popupButtonCal" showOn="button" /> 
 
                                 <h:outputLabel value="Adresse :" for="adresse" />
-                                <p:inputText id="adresse" value="#{clientBean.adresse}" title="Adresse" />
+                                <p:inputText id="adresse" value="#{clientMBean.adresse}" title="Adresse" />
 
                                 <h:outputLabel value="Téléphone :" for="telephone" />
-                                <p:inputText id="telephone" value="#{clientBean.telephone}" title="telephone" required="true"
+                                <p:inputText id="telephone" value="#{clientMBean.telephone}" title="telephone" required="true"
                                              requiredMessage="Veuillez saisir le numéro de téléphone"/>
 
                                 <h:outputLabel value="Email :" for="mail" />
-                                <p:inputText id="mail" value="#{clientBean.mail}" title="mail" />
+                                <p:inputText id="mail" value="#{clientMBean.mail}" title="mail" />
 
                                 <h:outputLabel value="Solde:" for="solde" />
-                                <p:spinner id="solde" value="#{clientBean.solde}" prefix="€" required="true"
+                                <p:spinner id="solde" value="#{clientMBean.solde}" prefix="€" required="true"
                                            requiredMessage="Veuillez saisir le solde" />  
 
 
@@ -48,8 +48,8 @@
                         </p:panel>
 
                         <h:panelGrid columns="2">
-                            <p:commandButton id="c" value="Valider" action="#{clientBean.creerClient}"/>
-                            <p:commandButton id="retour" value="Retour" action="#{compteBean.list()}"/>
+                            <p:commandButton id="c" value="Valider" action="#{clientMBean.creerUnClient}"/>
+                            <p:commandButton id="retour" value="Retour" action="#{compteBancaireMBean.listCompteBancaire()}"/>
                         </h:panelGrid>
                     </h:form>
                 </f:view>

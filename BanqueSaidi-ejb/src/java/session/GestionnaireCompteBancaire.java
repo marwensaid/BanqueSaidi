@@ -113,4 +113,8 @@ public class GestionnaireCompteBancaire {
         CompteBancaire c = em.find(CompteBancaire.class, idCompte);
         return c.getListeOperations();
     }
+
+    public void delete(CompteBancaire compteBancaire) {
+        em.remove(em.merge(compteBancaire));
+    }
 }

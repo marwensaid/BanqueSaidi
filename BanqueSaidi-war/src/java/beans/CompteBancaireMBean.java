@@ -6,12 +6,15 @@
 package beans;
 
 import entities.CompteBancaire;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import session.GestionnaireCompteBancaire;
@@ -20,12 +23,14 @@ import session.GestionnaireCompteBancaire;
  *
  * @author marwen
  */
-@ManagedBean
-@RequestScoped
-public class CompteBancaireMBean {
+@Named(value = "compteBancaireMBean")
+@SessionScoped
+public class CompteBancaireMBean implements Serializable {
 
     @EJB
     private GestionnaireCompteBancaire gc;
+    private CompteBancaire compteBancaire;
+    private List<CompteBancaire> listCompteBancaire;
     private int idCompteACrediter;
     private double montantACrediter;
     private int idCompteADebiter;
@@ -54,6 +59,24 @@ public class CompteBancaireMBean {
                 return gc.getNBComptes();
             }
         };
+    }
+
+    public List<CompteBancaire> getListCompteBancaire() {
+        return listCompteBancaire;
+    }
+
+    public void setListCompteBancaire(List<CompteBancaire> listCompteBancaire) {
+        this.listCompteBancaire = listCompteBancaire;
+    }
+    
+    
+
+    public CompteBancaire getCompteBancaire() {
+        return compteBancaire;
+    }
+
+    public void setCompteBancaire(CompteBancaire compteBancaire) {
+        this.compteBancaire = compteBancaire;
     }
 
     public GestionnaireCompteBancaire getGc() {
@@ -221,11 +244,23 @@ public class CompteBancaireMBean {
     public void debiterUnCompte() {
         gc.debiterUnCompte(idCompteADebiter, montantADebiter);
     }
+    
+         public String suppression(){
+        
+         gc.delete(this.compteBancaire);
+         
+         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Suppression réussie ","suppression OK");  
+          
+        FacesContext.getCurrentInstance().addMessage(null, message);  
+        return "listeComptes";
+     }
+     
+     public void suppress(){
+         gc.delete(this.compteBancaire);
+     }
 
     public void transferer() {
-        // MAUVAIS : DEUX TRANSACTIONS ICI !!!
-        //gc.debiterUnCompte(id1, montantTransfert);
-        //gc.crediterUnCompte(id2, montantTransfert);
+
         try {
             gc.transferer(id1, id2, montantTransfert);
         } catch (Exception e) {

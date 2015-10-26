@@ -157,8 +157,4 @@ public class Client implements Serializable {
         return "entities.Client[ id=" + id + " ]";
     }
 
-    public Object getListeComptes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

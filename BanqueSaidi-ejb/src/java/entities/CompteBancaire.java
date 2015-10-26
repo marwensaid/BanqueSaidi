@@ -11,12 +11,14 @@ import java.util.List;
 import javax.ejb.EJBException;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -34,13 +36,13 @@ abstract public class CompteBancaire implements Serializable {
     protected double solde;
     protected String nom;
     protected String desciption;
-    private Client client;
-
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    protected Client client;
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     protected List<OperationBancaire> listOperations = new ArrayList<>();
 
     public CompteBancaire() {
-
+        client = new Client();
     }
 
     public CompteBancaire(String nom, double solde) {

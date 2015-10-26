@@ -68,8 +68,6 @@ public class CompteBancaireMBean implements Serializable {
     public void setListCompteBancaire(List<CompteBancaire> listCompteBancaire) {
         this.listCompteBancaire = listCompteBancaire;
     }
-    
-    
 
     public CompteBancaire getCompteBancaire() {
         return compteBancaire;
@@ -244,20 +242,20 @@ public class CompteBancaireMBean implements Serializable {
     public void debiterUnCompte() {
         gc.debiterUnCompte(idCompteADebiter, montantADebiter);
     }
-    
-         public String suppression(){
-        
-         gc.delete(this.compteBancaire);
-         
-         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Suppression réussie ","suppression OK");  
-          
-        FacesContext.getCurrentInstance().addMessage(null, message);  
+
+    public String suppression() {
+
+        gc.delete(this.compteBancaire);
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Suppression réussie ", "suppression OK");
+
+        FacesContext.getCurrentInstance().addMessage(null, message);
         return "listeComptes";
-     }
-     
-     public void suppress(){
-         gc.delete(this.compteBancaire);
-     }
+    }
+
+    public void suppress() {
+        gc.delete(this.compteBancaire);
+    }
 
     public void transferer() {
 
@@ -267,6 +265,16 @@ public class CompteBancaireMBean implements Serializable {
             message = "Transfert impossible, pas assez d'argent";
             System.out.println("### PAS ASSEZ d'argent");
         }
+    }
+
+    public String detailCompte(CompteBancaire compteBancaire) {
+        this.compteBancaire = compteBancaire;
+        return "historiqueCompte?faces-redirect=true";
+    }
+
+    public String operationBancaire(CompteBancaire compteBancaire) {
+        this.compteBancaire = compteBancaire;
+        return "operation?faces-redirect=true";
     }
 
 }

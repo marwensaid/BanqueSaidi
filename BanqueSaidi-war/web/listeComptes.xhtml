@@ -27,7 +27,7 @@
                         </p:confirmDialog>
 
 
-                        <p:dataTable  id="cTable" value="#{compteBean.modele}" var="item" paginator="true" rows="5" lazy="true"
+                        <p:dataTable  id="cTable" value="#{compteBancaireMBean.modele}" var="item" paginator="true" rows="5" lazy="true"
                                       paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
                                       rowsPerPageTemplate="5,10,15"
                                       rowStyleClass="#{compteBean.colorow(item.solde)}"
@@ -49,17 +49,17 @@
                             </p:column>
 
                             <p:column headerText="Historique">
-                                <p:commandButton action="#{compteBean.showDetails(item)}" icon="ui-icon-search"/>                                  
+                                <p:commandButton action="#{compteBancaireMBean.detailCompte(item)}" icon="ui-icon-search"/>                                  
                             </p:column>
 
                             <p:column headerText="Opérations">
-                                <p:commandButton action="#{compteBean.operation(item)}" icon="ui-icon-pencil"/>                                  
+                                <p:commandButton action="#{compteBancaireMBean.operationBancaire(item)}" icon="ui-icon-pencil"/>                                  
                             </p:column>
 
                             <p:column headerText="Suppression" style="width: 20px">
                                 <p:commandLink oncomplete="deleteDlg.show();">
                                     <h:panelGroup styleClass="ui-icon ui-icon-trash" />
-                                    <f:setPropertyActionListener value="#{item}" target="#{compteBean.compte}" />
+                                    <f:setPropertyActionListener value="#{item}" target="#{compteBancaireMBean.compteBancaire}" />
                                 </p:commandLink>                 
                             </p:column>      
 

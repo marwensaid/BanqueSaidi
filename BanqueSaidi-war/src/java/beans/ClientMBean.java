@@ -6,6 +6,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -109,5 +110,10 @@ public class ClientMBean implements Serializable {
         return "listeComptes";
 
     }
+    
+    public String creerCompteTest() throws ParseException{
+        clientManager.creerClientTest();
+        return "listeComptes";
+    } 
 
 }

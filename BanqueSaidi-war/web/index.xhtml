@@ -6,23 +6,18 @@
       xmlns:p="http://primefaces.org/ui">
 
     <body>
-
         <ui:composition template="./TemplatePrincipal.xhtml">
-
             <ui:define name="content">
                 <h:form>
-
                     <br/>
                     Banque international SAIDI
                     <br/>
                     Voir les comptes bancaires
                     <br/>
                     <br/>
-                    <p:commandButton id="creerComptesTest" value="Générer les tests" action="#{clientBean.compteTest()}"/>
-
+                    <p:commandButton id="creerComptesTest" value="Générer les tests" action="#{clientMBean.creerCompteTest()}"/>
                 </h:form>
             </ui:define>
-
         </ui:composition>
 
     </body>

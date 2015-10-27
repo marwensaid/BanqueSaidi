@@ -19,12 +19,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author marwen
  */
 @Entity
+@Table(name="CompteBancaire")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CompteBancaire.findAll", query = "SELECT c FROM CompteBancaire c"),})
 abstract public class CompteBancaire implements Serializable {

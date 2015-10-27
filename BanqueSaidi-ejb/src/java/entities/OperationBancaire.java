@@ -61,7 +61,7 @@ public class OperationBancaire implements Serializable {
         this.description = description;
         this.montant = montant;
         this.dateOperation = new Date();
-
+        System.out.println("date :" + this.dateOperation);
     }
 
     public int getId() {

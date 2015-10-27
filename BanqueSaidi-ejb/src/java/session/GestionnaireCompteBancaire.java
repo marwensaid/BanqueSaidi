@@ -31,7 +31,6 @@ public class GestionnaireCompteBancaire {
 
     }
 
-    // Fait un insert d'un compte bancaire (entité) dans la base
     public void creerCompte(CompteBancaire c) {
         em.persist(c);
     }
@@ -136,7 +135,6 @@ public class GestionnaireCompteBancaire {
             }
             int indice1 = (int) (Math.random() * nbCompte) + 1;
             int indice2 = indice1;
-            //pour ne pas avoir le meme indice
             while (indice1 == indice2) {
                 indice2 = (int) (Math.random() * nbCompte) + 1;
             }
@@ -180,5 +178,12 @@ public class GestionnaireCompteBancaire {
         q.setFirstResult(depart);
         q.setMaxResults(nb);
         return q.getResultList();
+    }
+    
+    public int getAllOperations(Long id){
+        String r = "select count(o) from CompteBancaire as c, in(c.operations) as o where c.id="+id;
+        System.out.println(r);
+        Query q = this.em.createQuery(r);
+        return ((Long) q.getSingleResult()).intValue();
     }
 }

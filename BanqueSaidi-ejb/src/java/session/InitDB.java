@@ -20,12 +20,12 @@ public class InitDB {
 
     @EJB
     private GestionnaireCompteBancaire gc;
+
     @PostConstruct
-    public void InitDB(){
-       System.out.println("#### BD REMPLIE ###");
-       gc.creerBcpComptes();
-       gc.genererBcpOperations();
-      
-      
+    public void InitDB() {
+        System.out.println("#### BD REMPLIE ###");
+        gc.creerBcpComptes();
+        gc.genererBcpOperations();
+
     }
 }

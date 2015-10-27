@@ -151,4 +151,34 @@ public class GestionnaireCompteBancaire {
         rand += ((int) (Math.random() * 2)) * 0.5;
         this.transferer(id1, id2, rand);
     }
+    
+    public List<CompteBancaire> getComptesTrie(String champ, String order, int depart, int nb){
+        
+        String orderValue = "";
+        
+        if(order.equals("ASCENDING")) {
+            orderValue = "ASC";
+        } else {
+            orderValue = "DESC";
+        }
+        String r="";
+        if(champ.equals("nom")){
+            r = "select c from CompteBancaire c order by c.nom " 
+               + orderValue;
+            System.out.println("Trier les comptes par nom: " + r);  
+        }else if(champ.equals("id")){
+            r = "select c from CompteBancaire c order by c.id " 
+               + orderValue;
+            System.out.println("Trier les comptes par Id: " + r);  
+        }else if(champ.equals("solde")){
+            r = "select c from CompteBancaire c order by c.solde " 
+               + orderValue;
+            System.out.println("Trier les comptes par solde: " + r);  
+        }
+        
+        Query q = em.createQuery(r);
+        q.setFirstResult(depart);
+        q.setMaxResults(nb);
+        return q.getResultList();
+    }
 }

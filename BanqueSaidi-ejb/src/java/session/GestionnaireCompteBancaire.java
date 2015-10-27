@@ -24,9 +24,9 @@ public class GestionnaireCompteBancaire {
 
     @PersistenceContext
     private EntityManager em;
+    public static String[] TABNOM = {"Totti", "Totto", "Zidane", "Messi", "Ronaldo", "Saidi", "Jimy", "Deco", "Pow", "James", "Boom", "Miaou", "Than", "Low"};
+    public static String[] TABPRENOMS = {"Halil", "Tural", "Youri", "Koman", "Peter", "Romac", "Lima", "Carlos", "Carles", "Rojo", "Momo", "Marwen", "Zak", "Zabaleta", "Rio",};
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     public GestionnaireCompteBancaire() {
 
     }
@@ -50,21 +50,21 @@ public class GestionnaireCompteBancaire {
         return q.getResultList();
     }
 
-    public void crediterUnCompte(int id, double montant) {
+    public void crediterUnCompte(Long id, double montant) {
         // On va chercher un compte dans la base, il est connecté
         CompteBancaire c = em.find(CompteBancaire.class, id);
         // On update juste en faisant solde+=montant
         c.crediter(montant);
     }
 
-    public void debiterUnCompte(int id, double montant) {
+    public void debiterUnCompte(Long id, double montant) {
         // On va chercher un compte dans la base, il est connecté
         CompteBancaire c = em.find(CompteBancaire.class, id);
         // On update juste en faisant solde-=montant
         c.debiter(montant);
     }
 
-    public void transferer(int id1, int id2, double montant) {
+    public void transferer(long id1, Long id2, double montant) {
         debiterUnCompte(id1, montant);
         crediterUnCompte(id2, montant);
     }
@@ -116,5 +116,39 @@ public class GestionnaireCompteBancaire {
 
     public void delete(CompteBancaire compteBancaire) {
         em.remove(em.merge(compteBancaire));
+    }
+
+    void creerBcpComptes() {
+        for (int i = 0; i < 2000; i++) {
+            int indice1 = (int) (Math.random() * TABNOM.length - 1);
+            int indice2 = (int) (Math.random() * TABPRENOMS.length - 1);
+            this.creerCompte(new CompteBancaire(TABNOM[indice1] + " " + TABPRENOMS[indice2], (int) (Math.random() * 10000)) {
+            });
+        }
+    }
+
+    void genererBcpOperations() {
+        int nbCompte = ((Long) this.em.createNamedQuery("CompteBancaire.count").getSingleResult()).intValue();
+        System.out.println("### Opération de Test ###");
+        for (int i = 0; i < 10000; i++) {
+            if (i % 1000 == 0) {
+                System.out.println(i + "opérations Ok");
+            }
+            int indice1 = (int) (Math.random() * nbCompte) + 1;
+            int indice2 = indice1;
+            //pour ne pas avoir le meme indice
+            while (indice1 == indice2) {
+                indice2 = (int) (Math.random() * nbCompte) + 1;
+            }
+            this.creerOperationsComptes(new Long(indice1), new Long(indice2));
+        }
+        System.out.println("### Opérations créées ###");
+        System.out.println("### End of Operation ###");
+    }
+
+    private void creerOperationsComptes(Long id1, Long id2) {
+        double rand = (int) (Math.random() * 1000 + 1);
+        rand += ((int) (Math.random() * 2)) * 0.5;
+        this.transferer(id1, id2, rand);
     }
 }

@@ -20,18 +20,18 @@
                             <h:panelGrid columns="2">
 
                                 <h:outputLabel value="Compte à débiter : " for="crediteur" />
-                                <p:selectOneMenu id="crediteur" value="#{compteBancaireMBean.idCompteADebiter}"  required="true">
+                                <completion id="crediteur" value="#{compteBancaireMBean.idCompteADebiter}" completeMethod="#{CompteBancaireMBean.autoCompletion}" required="true">
                                     <c:forEach var="item" items="#{compteBancaireMBean.compteBancaire}" >
                                         <f:selectItem itemLabel="#{item.client.nom} #{item.client.prenom} - Compte n° #{item.id}" itemValue="#{item.id}"/>
                                     </c:forEach>
-                                </p:selectOneMenu>
+                                </completion>
 
                                 <h:outputLabel value="Compte à créditer : " for="debiteur" />
-                                <p:selectOneMenu id="debiteur" value="#{compteBancaireMBean.idCompteACrediter}" required="true">
+                                <completion id="debiteur" value="#{compteBancaireMBean.idCompteACrediter}" completeMethod="#{CompteBancaireMBean.autoCompletion}" required="true">
                                     <c:forEach var="item" items="#{compteBancaireMBean.compteBancaire}" >
                                         <f:selectItem itemLabel="#{item.client.nom} #{item.client.prenom}  - Compte n° #{item.id}" itemValue="#{item.id}"/>
                                     </c:forEach>
-                                </p:selectOneMenu>
+                                </completion>
 
 
 

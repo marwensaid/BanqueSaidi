@@ -263,7 +263,7 @@ public class CompteBancaireMBean implements Serializable {
             gc.transferer(id1, id2, montantTransfert);
         } catch (Exception e) {
             message = "Transfert impossible, pas assez d'argent";
-            System.out.println("### PAS ASSEZ d'argent");
+            System.out.println("### PAS ASSEZ d'argent ###");
         }
     }
 
@@ -275,6 +275,14 @@ public class CompteBancaireMBean implements Serializable {
     public String operationBancaire(CompteBancaire compteBancaire) {
         this.compteBancaire = compteBancaire;
         return "operation?faces-redirect=true";
+    }
+
+    public List<String> autoCompletion(String query) {
+        List<String> varAutoComp = new ArrayList<String>();
+        for (int i = 0; i < 10; i++) {
+            varAutoComp.add(query + i);
+        }
+        return varAutoComp;
     }
 
 }

@@ -6,6 +6,7 @@
 package session;
 
 import entities.Client;
+import entities.ClientAuthentification;
 import entities.CompteBancaire;
 import entities.OperationBancaire;
 import java.text.ParseException;
@@ -96,8 +97,18 @@ public class GestionnaireDeClient {
         creerClient("Paul", "Mac Cartney", simpleDateFormat.parse("1942/09/18"), "Paris", "07800800", "paul@beatles.com", 950000);
         creerClient("Ringo", "Starr", simpleDateFormat.parse("1940/07/07"), "Londre", "06333980", "ringo@beatles.com", 20000);
         creerClient("Georges", "Harrisson", simpleDateFormat.parse("1943/02/25"), "Paris", "07966098", "georges@beatles.com", 100000);
-        creerClient("Hala", "Ghoualmi", simpleDateFormat.parse("1988/01/13"), "Nice", "07218218", "hala@beatles.ca", 123000);
 
+    }
+
+    public ClientAuthentification connecter(String login, String pwd) {
+        String client = "select u from ClientAuthentification c where c.ClientLogin='"+login+"' and c.ClientPwd='"+pwd+"'";
+        Query query = this.em.createQuery(client);
+        query.setMaxResults(1);
+        if(query.getResultList().isEmpty()){
+            return null;
+        }
+        ClientAuthentification clientResult = (ClientAuthentification) query.getSingleResult();
+        return clientResult;
     }
 
 }

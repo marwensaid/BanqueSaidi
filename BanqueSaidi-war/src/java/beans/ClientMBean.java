@@ -110,8 +110,9 @@ public class ClientMBean implements Serializable {
     }
     
     public String creerCompteTest() throws ParseException{
-        clientManager.creerClientTest();
+        clientManager.creerClientTest();       
         return "listeComptes";
     } 
+   
 
 }

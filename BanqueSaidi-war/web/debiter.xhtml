@@ -30,7 +30,7 @@
                     </p:submenu>
                     <p:submenu label="Operations Compte">
                         <p:menuitem value="List des operations" outcome="Operations.xhtml"/>
-                        <p:menuitem value="Virement banquaire" outcome="virement.xhtml"/>
+                        <p:menuitem value="Debiter compte" outcome="debiter.xhtml"/>
                     </p:submenu>
                     <p:separator />
                     <p:submenu label="Autres">   
@@ -47,33 +47,28 @@
                             <p:messages id="messages" /> 
                             <h:panelGrid columns="2">
 
-                                <h:outputLabel value="Compte à débiter : " for="crediteur" />
-                                <completion id="crediteur" value="#{compteBancaireMBean.idCompteADebiter}" completeMethod="#{CompteBancaireMBean.autoCompletion}" required="true">
-                                    <c:forEach var="item" items="#{compteBancaireMBean.compteBancaire}" >
-                                        <f:selectItem itemLabel="#{item.client.nom} #{item.client.prenom} - Compte n° #{item.id}" itemValue="#{item.id}"/>
-                                    </c:forEach>
-                                </completion>
-
-                                <h:outputLabel value="Compte à créditer : " for="debiteur" />
-                                <completion id="debiteur" value="#{compteBancaireMBean.idCompteACrediter}" completeMethod="#{CompteBancaireMBean.autoCompletion}" required="true">
-                                    <c:forEach var="item" items="#{compteBancaireMBean.compteBancaire}" >
-                                        <f:selectItem itemLabel="#{item.client.nom} #{item.client.prenom}  - Compte n° #{item.id}" itemValue="#{item.id}"/>
-                                    </c:forEach>
-                                </completion>
-
-
-
-                                <h:outputLabel value="Montant : " for="montant"/>
-
-                                <p:spinner id="montant" value="#{compteBancaireMBean.montantACrediter}" prefix="€" 
+                           
+                
+                    <h:outputLabel value="Compte à debiter"></h:outputLabel>
+                    <p:inputText value="#{compteBancaireMBean.idCompteADebiter}"></p:inputText>
+                    <h:outputLabel value="Montant : " for="montant"/>
+                    <p:spinner id="montant" value="#{compteBancaireMBean.montantADebiter}" prefix="€" 
                                            requiredMessage="Veuillez saisir le montant" required="true" min="0"/>  
+                    
+                    <p:commandButton id="valider" value="Valider" update="form" action="#{compteBancaireMBean.debiterUnCompte()}" process="@form"  >
+                        <p:confirm header="Confirmation" message="Vous êtes sûr de votre opération?" icon="ui-icon-alert" />
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
                             </h:panelGrid>
                         </p:panel>
 
-                        <h:panelGrid columns="2">
-                            <p:commandButton id="valider" value="Valider" update="panel" action="#{compteBancaireMBean.montantTransfert}" process="@form" />  
-                            <p:commandButton id="back" value="Retour" action="#{compteBancaireMBean.listCompteBancaire()}"/> 
-                        </h:panelGrid>
+                        
+                            
+                         
+                        
                     </h:form>
                 </f:view>
             </ui:define>

@@ -16,6 +16,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -55,7 +57,7 @@ public class GestionnaireDeClient {
         OperationBancaire operation = new OperationBancaire("Création du compte", solde);
         compte.getOperations().add(operation);
 
-        compte.setClient(client);
+       // compte.setClient(client);
         client.getListeComptesBancaire().add(compte);
 
         em.persist(client);
@@ -91,12 +93,14 @@ public class GestionnaireDeClient {
      *
      * @throws java.text.ParseException
      */
+    
+     
     public void creerClientTest() throws ParseException {
         creerClient("John", "Lennon", simpleDateFormat.parse("1940/10/09"), "Nice", "06200200", "john@beatles.com", 150000);
         creerClient("Paul", "Mac Cartney", simpleDateFormat.parse("1942/09/18"), "Paris", "07800800", "paul@beatles.com", 950000);
         creerClient("Ringo", "Starr", simpleDateFormat.parse("1940/07/07"), "Londre", "06333980", "ringo@beatles.com", 20000);
         creerClient("Georges", "Harrisson", simpleDateFormat.parse("1943/02/25"), "Paris", "07966098", "georges@beatles.com", 100000);
-
+        
     }
 
     public ClientAuthentification connecter(String login, String pwd) {

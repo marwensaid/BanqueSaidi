@@ -39,7 +39,7 @@ public class GestionnaireCompteBancaire {
         em.persist(c);
     }
 
-    public CompteBancaire creerCompte(String nom, double solde) {
+    public CompteBancaire creerCompteBancaire(String nom, double solde) {
         CompteBancaire compte = new CompteBancaire(nom, solde) {
         };
         creerOperation(compte, "Création du compte", solde);
@@ -88,10 +88,10 @@ public class GestionnaireCompteBancaire {
 
     public void creerComptesTest() {
 
-        creerCompte("test1", 150020);
-        creerCompte("test2", 950001);
-        creerCompte("test3", 20030);
-        creerCompte("test4", 100050);
+        creerCompteBancaire("test1", 150020);
+        creerCompteBancaire("test2", 950001);
+        creerCompteBancaire("test3", 20030);
+        creerCompteBancaire("test4", 100050);
     }
 
     public List<CompteBancaire> getLazyComptes(int start, int nbComptes) {
@@ -121,7 +121,7 @@ public class GestionnaireCompteBancaire {
         em.remove(em.merge(compteBancaire));
     }
 
-    void creerBcpComptes() {
+    public void creerBcpComptes() {
         for (int i = 0; i < 2000; i++) {
             int indice1 = (int) (Math.random() * TABNOM.length - 1);
             int indice2 = (int) (Math.random() * TABPRENOMS.length - 1);
@@ -146,7 +146,7 @@ public class GestionnaireCompteBancaire {
         }
     }
 
-    void genererBcpOperations() {
+    public void genererBcpOperations() {
         int nbCompte = ((Long) this.em.createNamedQuery("CompteBancaire.count").getSingleResult()).intValue();
         System.out.println("### Opération de Test ###");
         for (int i = 0; i < 10000; i++) {

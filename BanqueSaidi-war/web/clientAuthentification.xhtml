@@ -30,7 +30,7 @@
                     </p:submenu>
                     <p:submenu label="Operations Compte">
                         <p:menuitem value="List des operations" outcome="Operations.xhtml"/>
-                        <p:menuitem value="Virement banquaire" outcome="virement.xhtml"/>
+                        <p:menuitem value="Debiter compte" outcome="debiter.xhtml"/>
                     </p:submenu>
                     <p:separator />
                     <p:submenu label="Autres">   
@@ -38,7 +38,8 @@
                 </p:slideMenu>
                 </h:form>
             </ui:define>
-
+                
+    <ui:define name="content">
         <h:form>
             <p:panel id="panel" style="border: 0 !important;">
                 <p:messages id="msgs"/>

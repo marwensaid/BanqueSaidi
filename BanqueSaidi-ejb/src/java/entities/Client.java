@@ -28,17 +28,17 @@ public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String nom;
-    private String prenom;
+     int id;
+     String nom;
+     String prenom;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateNaissance;
-    private String adresse;
-    private String telephone;
-    private String mail;
+     Date dateNaissance;
+     String adresse;
+     String telephone;
+     String mail;
 
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    private List<CompteBancaire> listeComptesBancaire = new ArrayList();
+     List<CompteBancaire> listeComptesBancaire = new ArrayList();
 
     public Client() {
     }

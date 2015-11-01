@@ -64,6 +64,7 @@ public class CompteBancaireMBean implements Serializable {
     public List<CompteBancaire> getListCompteBancaire() {
         return listCompteBancaire;
     }
+    
 
     public void setListCompteBancaire(List<CompteBancaire> listCompteBancaire) {
         this.listCompteBancaire = listCompteBancaire;
@@ -238,9 +239,13 @@ public class CompteBancaireMBean implements Serializable {
     public void crediterUnCompte() {
         gc.crediterUnCompte(idCompteACrediter, montantACrediter);
     }
-
+ public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
     public void debiterUnCompte() {
         gc.debiterUnCompte(idCompteADebiter, montantADebiter);
+        addMessage("Confirmation", "Les comptes sont créer avec succes");
     }
 
     public String suppression() {

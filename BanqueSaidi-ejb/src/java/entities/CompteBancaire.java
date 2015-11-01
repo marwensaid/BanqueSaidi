@@ -43,13 +43,17 @@ import javax.xml.bind.annotation.XmlRootElement;
      double solde;
      String nom;
      String desciption;
-    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToOne(cascade = {CascadeType.ALL})
      Client client;
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
      List<OperationBancaire> listOperations = new ArrayList<>();
 
     public CompteBancaire() {
         client = new Client();
+    }
+
+    public void setListOperations(List<OperationBancaire> listOperations) {
+        this.listOperations = listOperations;
     }
 
     public CompteBancaire(String nom, double solde) {

@@ -19,13 +19,13 @@ import session.GestionnaireDeClient;
  *
  * @author marwen
  */
-@Named(value = "clientMBean")
+@Named("clientMBean")
 @SessionScoped
 public class ClientMBean implements Serializable {
 
     @EJB
     private GestionnaireDeClient clientManager;
-
+   
     private String nom;
     private String prenom;
     private Date dateNaiss;

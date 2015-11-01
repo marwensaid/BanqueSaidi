@@ -91,7 +91,7 @@ public class GestionnaireCompteBancaire {
     }
 
     public List<CompteBancaire> getLazyComptes(int start, int nbComptes) {
-        Query query = em.createNamedQuery("CompteBanquaire.findAll");
+        Query query = em.createNamedQuery("CompteBancaire.findAll");
         query.setFirstResult(start);
         query.setMaxResults(nbComptes);
 
@@ -99,7 +99,7 @@ public class GestionnaireCompteBancaire {
     }
 
     public int getNBComptes() {
-        Query query = em.createNamedQuery("CompteBanquaire.nbComptes");
+        Query query = em.createNamedQuery("CompteBancaire.count");
         return ((Long) query.getSingleResult()).intValue();
     }
 

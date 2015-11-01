@@ -34,19 +34,19 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CompteBancaire.findAll", query = "SELECT c FROM CompteBancaire c order by c.id ASC")
 
 })
-abstract public class CompteBancaire implements Serializable {
+ public class CompteBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected int id;
-    protected double solde;
-    protected String nom;
-    protected String desciption;
+     int id;
+     double solde;
+     String nom;
+     String desciption;
     @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    protected Client client;
+     Client client;
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    protected List<OperationBancaire> listOperations = new ArrayList<>();
+     List<OperationBancaire> listOperations = new ArrayList<>();
 
     public CompteBancaire() {
         client = new Client();
@@ -69,6 +69,22 @@ abstract public class CompteBancaire implements Serializable {
 
     public void addOperationBancaire(OperationBancaire operationBancaire) {
         listOperations.add(operationBancaire);
+    }
+
+    public void setDesciption(String desciption) {
+        this.desciption = desciption;
+    }
+
+    public String getDesciption() {
+        return desciption;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public List<OperationBancaire> getListOperations() {
+        return listOperations;
     }
 
     public String getNom() {

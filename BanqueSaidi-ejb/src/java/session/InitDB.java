@@ -20,11 +20,13 @@ public class InitDB {
 
     @EJB
     private GestionnaireCompteBancaire gc;
+    
 
     @PostConstruct
     public void InitDB() {
         System.out.println("#### Base,de donnée générée  ###");
         gc.creerBcpComptes();
+        
         gc.genererBcpOperations();
 
     }

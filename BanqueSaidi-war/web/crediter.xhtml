@@ -50,13 +50,13 @@
 
                            
                 
-                    <h:outputLabel value="Compte à debiter"></h:outputLabel>
-                    <p:inputText value="#{compteBancaireMBean.idCompteADebiter}"></p:inputText>
+                    <h:outputLabel value="Compte à crediter"></h:outputLabel>
+                    <p:inputText value="#{compteBancaireMBean.idCompteACrediter}"></p:inputText>
                     <h:outputLabel value="Montant : " for="montant"/>
-                    <p:spinner id="montant" value="#{compteBancaireMBean.montantADebiter}" prefix="€" 
+                    <p:spinner id="montant" value="#{compteBancaireMBean.montantACrediter}" prefix="€" 
                                            requiredMessage="Veuillez saisir le montant" required="true" min="0"/>  
                     
-                    <p:commandButton id="valider" value="Valider" update="form" action="#{compteBancaireMBean.debiterUnCompte()}" process="@form"  >
+                    <p:commandButton id="valider" value="Valider" update="form" action="#{compteBancaireMBean.crediterUnCompte()}" process="@form"  >
                         <p:confirm header="Confirmation" message="Vous êtes sûr de votre opération?" icon="ui-icon-alert" />
                     </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

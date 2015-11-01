@@ -5,7 +5,10 @@
  */
 package session;
 
+import com.sun.corba.se.impl.orbutil.closure.Constant;
 import entities.CompteBancaire;
+import entities.CompteCourant;
+import entities.CompteEpargne;
 import entities.OperationBancaire;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -26,6 +29,7 @@ public class GestionnaireCompteBancaire {
     private EntityManager em;
     public static String[] TABNOM = {"Totti", "Totto", "Zidane", "Messi", "Ronaldo", "Saidi", "Jimy", "Deco", "Pow", "James", "Boom", "Miaou", "Than", "Low"};
     public static String[] TABPRENOMS = {"Halil", "Tural", "Youri", "Koman", "Peter", "Romac", "Lima", "Carlos", "Carles", "Rojo", "Momo", "Marwen", "Zak", "Zabaleta", "Rio",};
+    private float taux = (float) 0.03;
 
     public GestionnaireCompteBancaire() {
 
@@ -126,6 +130,22 @@ public class GestionnaireCompteBancaire {
         }
     }
 
+    public void creerBcpComptesCourant() {
+        for (int i = 0; i < 2000; i++) {
+            int indice1 = (int) (Math.random() * TABNOM.length - 1);
+            int indice2 = (int) (Math.random() * TABPRENOMS.length - 1);
+            this.creerCompte(new CompteCourant(TABNOM[indice1] + " " + TABPRENOMS[indice2], (int) (Math.random() * 10000)));
+        }
+    }
+
+    public void creerBcpComptesEpargnes() {
+        for (int i = 0; i < 2000; i++) {
+            int indice1 = (int) (Math.random() * TABNOM.length - 1);
+            int indice2 = (int) (Math.random() * TABPRENOMS.length - 1);
+            this.creerCompte(new CompteEpargne(TABNOM[indice1] + " " + TABPRENOMS[indice2], (int) (Math.random() * 10000), taux));
+        }
+    }
+
     void genererBcpOperations() {
         int nbCompte = ((Long) this.em.createNamedQuery("CompteBancaire.count").getSingleResult()).intValue();
         System.out.println("### Opération de Test ###");
@@ -149,39 +169,39 @@ public class GestionnaireCompteBancaire {
         rand += ((int) (Math.random() * 2)) * 0.5;
         this.transferer(id1, id2, rand);
     }
-    
-    public List<CompteBancaire> getComptesTrie(String champ, String order, int depart, int nb){
-        
+
+    public List<CompteBancaire> getComptesTrie(String champ, String order, int depart, int nb) {
+
         String orderValue = "";
-        
-        if(order.equals("ASCENDING")) {
+
+        if (order.equals("ASCENDING")) {
             orderValue = "ASC";
         } else {
             orderValue = "DESC";
         }
-        String r="";
-        if(champ.equals("nom")){
-            r = "select c from CompteBancaire c order by c.nom " 
-               + orderValue;
-            System.out.println("Trier les comptes par nom: " + r);  
-        }else if(champ.equals("id")){
-            r = "select c from CompteBancaire c order by c.id " 
-               + orderValue;
-            System.out.println("Trier les comptes par Id: " + r);  
-        }else if(champ.equals("solde")){
-            r = "select c from CompteBancaire c order by c.solde " 
-               + orderValue;
-            System.out.println("Trier les comptes par solde: " + r);  
+        String r = "";
+        if (champ.equals("nom")) {
+            r = "select c from CompteBancaire c order by c.nom "
+                    + orderValue;
+            System.out.println("Trier les comptes par nom: " + r);
+        } else if (champ.equals("id")) {
+            r = "select c from CompteBancaire c order by c.id "
+                    + orderValue;
+            System.out.println("Trier les comptes par Id: " + r);
+        } else if (champ.equals("solde")) {
+            r = "select c from CompteBancaire c order by c.solde "
+                    + orderValue;
+            System.out.println("Trier les comptes par solde: " + r);
         }
-        
+
         Query q = em.createQuery(r);
         q.setFirstResult(depart);
         q.setMaxResults(nb);
         return q.getResultList();
     }
-    
-    public int getAllOperations(Long id){
-        String r = "select count(o) from CompteBancaire as c, in(c.operations) as o where c.id="+id;
+
+    public int getAllOperations(Long id) {
+        String r = "select count(o) from CompteBancaire as c, in(c.operations) as o where c.id=" + id;
         System.out.println(r);
         Query q = this.em.createQuery(r);
         return ((Long) q.getSingleResult()).intValue();

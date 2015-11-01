@@ -5,8 +5,39 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <body>
 
-    <ui:define name="content">
+        
+            <ui:composition template="./TemplatePrincipal.xhtml">
+            <ui:define name="top">
+                <p:toolbar style="background-color: #9999ff">  
+                    <f:facet name="left">
+                        <img src="resources/logo mbds.jpg" alt="" height="80"/>
+                         </f:facet>
+                </p:toolbar>
+            </ui:define>
+            
+            <ui:define name="left">
+                <h:form>
+                    <h1>Menu principal</h1>
+                    <p:separator />
+                <p:slideMenu style="width: 170px">
+                    <p:menuitem value="Accueil" outcome="index.xhtml" />
+                    <p:submenu label="Gestion Compte">
+                        <p:menuitem value="Ajouter un client" outcome="ajoutClient.xhtml"/>
+                        <p:menuitem value="Lister les comptes" outcome="listeComptes.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Operations Compte">
+                        <p:menuitem value="List des operations" outcome="Operations.xhtml"/>
+                        <p:menuitem value="Virement banquaire" outcome="virement.xhtml"/>
+                    </p:submenu>
+                    <p:separator />
+                    <p:submenu label="Autres">   
+                    </p:submenu>
+                </p:slideMenu>
+                </h:form>
+            </ui:define>
 
         <h:form>
             <p:panel id="panel" style="border: 0 !important;">
@@ -30,5 +61,7 @@
         </h:form>
 
     </ui:define>
+        </ui:composition>
+    </body>
 </html>
 

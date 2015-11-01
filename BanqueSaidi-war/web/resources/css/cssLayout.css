@@ -16,9 +16,10 @@
 
 #left {
     float: left;
-    background-color: #ece3a5;
+    background-color: #cecdcd;
     padding: 5px;
-    width: 150px;
+    width: 180px;
+    height: max-content
 }
 
 #right {
@@ -37,7 +38,7 @@
 .left_content {
     background-color: #dddddd;
     padding: 5px;
-    margin-left: 170px;
+    margin-left: 200px;
 }
 
 .right_content {
@@ -47,15 +48,15 @@
 }
 
 #top a:link, #top a:visited {
-    color: white;
-    font-weight : bold;
-    text-decoration: none;
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
 }
 
 #top a:link:hover, #top a:visited:hover  {
-    color: black;
-    font-weight : bold;
-    text-decoration : underline;
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
 }
 
 

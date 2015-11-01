@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <f:metadata>
         <f:viewParam name="id" value="#{operationsBancairesMBean.idCompte}"/>
     </f:metadata>
@@ -11,15 +12,44 @@
     <body>
 
         <ui:composition template="./TemplatePrincipal.xhtml">
+            <ui:define name="top">
+                <p:toolbar style="background-color: #9999ff">  
+                    <f:facet name="left">
+                        <img src="resources/logo mbds.jpg" alt="" height="80"/>
+                         </f:facet>
+                </p:toolbar>
+            </ui:define>
+            
+            <ui:define name="left">
+                <h:form>
+                    <h1>Menu principal</h1>
+                    <p:separator />
+                <p:slideMenu style="width: 170px">
+                    <p:menuitem value="Accueil" outcome="index.xhtml" />
+                    <p:submenu label="Gestion Compte">
+                        <p:menuitem value="Ajouter un client" outcome="ajoutClient.xhtml"/>
+                        <p:menuitem value="Lister les comptes" outcome="listeComptes.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Operations Compte">
+                        <p:menuitem value="List des operations" outcome="Operations.xhtml"/>
+                        <p:menuitem value="Virement banquaire" outcome="virement.xhtml"/>
+                    </p:submenu>
+                    <p:separator />
+                    <p:submenu label="Autres">   
+                    </p:submenu>
+                </p:slideMenu>
+                </h:form>
+            </ui:define>
 
             <ui:define name="content">
+                <p:panel id="panel" style="margin-bottom:10px;">  
                 <h1>Operations bancaires du compte No #{param.id}:</h1>
                 <f:view>
                     <h:form>
                         <h1><h:outputText value="List"/></h1>
                         <h:dataTable value="#{operationsBancairesMBean.operationsBancaires}" var="item">
                             <h:column>
-                                <f:facet name="header">
+                                <f:facet name="header"> 
                                     <h:outputText value="Dateoperation"/>
                                 </f:facet>
                                 <h:outputText value="#{item.dateoperation}">
@@ -47,6 +77,7 @@
                         </h:dataTable>
                     </h:form>
                 </f:view>
+                </p:panel>
             </ui:define>
 
         </ui:composition>

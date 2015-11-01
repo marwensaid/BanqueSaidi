@@ -8,49 +8,82 @@
 
     <body>
 
-        <ui:composition template="./TemplatePrincipal.xhtml">
+        
+            
+            <ui:composition template="./TemplatePrincipal.xhtml">
+            <ui:define name="top">
+                <p:toolbar style="background-color: #9999ff">  
+                    <f:facet name="left">
+                        <img src="resources/logo mbds.jpg" alt="" height="80"/>
+                         </f:facet>
+                </p:toolbar>
+            </ui:define>
+            
+            <ui:define name="left">
+                <h:form>
+                    <h1>Menu principal</h1>
+                    <p:separator />
+                <p:slideMenu style="width: 170px">
+                    <p:menuitem value="Accueil" outcome="index.xhtml" />
+                    <p:submenu label="Gestion Compte">
+                        <p:menuitem value="Ajouter un client" outcome="ajoutClient.xhtml"/>
+                        <p:menuitem value="Lister les comptes" outcome="listeComptes.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Operations Compte">
+                        <p:menuitem value="List des operations" outcome="Operations.xhtml"/>
+                        <p:menuitem value="Virement banquaire" outcome="virement.xhtml"/>
+                    </p:submenu>
+                    <p:separator />
+                    <p:submenu label="Autres">   
+                    </p:submenu>
+                </p:slideMenu>
+                </h:form>
+            </ui:define>
 
             <ui:define name="content">
                 <f:view>
                     <h:form>
-                        <p:panel id="panel" header="Ajouter un nouveau client" style="margin-bottom:10px;">  
-
-                            <p:messages id="messages" /> 
-                            <h:panelGrid columns="2">
+                        <p:panel id="panel" style="margin-bottom:10px;">  
+                            
+                            <p:messages id="messages" showDetail="true" autoUpdate="true"/> 
+                            <h:panelGrid id="grid" columns="3" >
 
                                 <h:outputLabel value="Nom:" for="nom" />
                                 <p:inputText id="nom" value="#{clientMBean.nom}" title="Nom" required="true"
                                              requiredMessage="Veuillez saisir le nom"  />
+                                <p:message for="nom" display="default" />
 
                                 <h:outputLabel value="Prénom :" for="prenom" />
                                 <p:inputText id="prenom" value="#{clientMBean.prenom}" title="Prenom" required="true"
                                              requiredMessage="Veuillez saisir le prénom" />
-
+                                <p:message for="prenom"/>
+                                
                                 <h:outputText value="Date de naissance: " />  
-                                <p:calendar value="#{clientMBean.dateNaiss}" id="popupButtonCal" showOn="button" /> 
+                                <p:calendar value="#{clientMBean.dateNaiss}" id="popupButtonCal" showOn="button" required="true" /> 
+                                <p:message for="popupButtonCal"/>
 
                                 <h:outputLabel value="Adresse :" for="adresse" />
-                                <p:inputText id="adresse" value="#{clientMBean.adresse}" title="Adresse" />
+                                <p:inputText id="adresse" value="#{clientMBean.adresse}" title="Adresse" required="true" />
+                                <p:message for="adresse"/>
 
                                 <h:outputLabel value="Téléphone :" for="telephone" />
                                 <p:inputText id="telephone" value="#{clientMBean.telephone}" title="telephone" required="true"
                                              requiredMessage="Veuillez saisir le numéro de téléphone"/>
+                                <p:message for="telephone"/>
 
                                 <h:outputLabel value="Email :" for="mail" />
-                                <p:inputText id="mail" value="#{clientMBean.mail}" title="mail" />
+                                <p:inputText id="mail" value="#{clientMBean.mail}" title="mail" required="true"/>
+                                <p:message for="mail"/>
 
                                 <h:outputLabel value="Solde:" for="solde" />
                                 <p:spinner id="solde" value="#{clientMBean.solde}" prefix="€" required="true"
                                            requiredMessage="Veuillez saisir le solde" />  
+                                <p:message for="solde"/>
 
-
+                                <p:commandButton id="submitButton" value="Valider" action="#{clientMBean.creerUnClient}" update="grid"/>
+                                <p:commandButton id="retour" value="Retour" action="#{compteBancaireMBean.listCompteBancaire()}"/>
                             </h:panelGrid>
                         </p:panel>
-
-                        <h:panelGrid columns="2">
-                            <p:commandButton id="c" value="Valider" action="#{clientMBean.creerUnClient}"/>
-                            <p:commandButton id="retour" value="Retour" action="#{compteBancaireMBean.listCompteBancaire()}"/>
-                        </h:panelGrid>
                     </h:form>
                 </f:view>
 

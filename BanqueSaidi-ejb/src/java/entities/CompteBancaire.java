@@ -27,10 +27,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author marwen
  */
 @Entity
-@Table(name="CompteBancaire")
+@Table(name = "CompteBancaire")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CompteBancaire.findAll", query = "SELECT c FROM CompteBancaire c"),})
+    @NamedQuery(name = "CompteBancaire.count", query = "SELECT count(c) FROM CompteBancaire c "),
+    @NamedQuery(name = "CompteBancaire.findAll", query = "SELECT c FROM CompteBancaire c order by c.id ASC")
+
+})
 abstract public class CompteBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;

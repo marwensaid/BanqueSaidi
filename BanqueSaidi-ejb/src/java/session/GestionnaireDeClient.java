@@ -38,7 +38,7 @@ public class GestionnaireDeClient {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
     @EJB
-    private GestionnaireDeClient gestionnaireDeClient;
+    private GestionnaireCompteBancaire gcb;
 
     public void persist(Object object) {
         em.persist(object);
@@ -100,7 +100,11 @@ public class GestionnaireDeClient {
         creerClient("Paul", "Mac Cartney", simpleDateFormat.parse("1942/09/18"), "Paris", "07800800", "paul@beatles.com", 950000);
         creerClient("Ringo", "Starr", simpleDateFormat.parse("1940/07/07"), "Londre", "06333980", "ringo@beatles.com", 20000);
         creerClient("Georges", "Harrisson", simpleDateFormat.parse("1943/02/25"), "Paris", "07966098", "georges@beatles.com", 100000);
-        
+         for(int i=0; i < 2000; i++) {
+            String nom = "Proprio" + i;
+            double solde = Math.round(Math.random() * 100000);
+            gcb.creerCompte(new CompteBancaire(nom, solde));
+        }
     }
 
     public ClientAuthentification connecter(String login, String pwd) {

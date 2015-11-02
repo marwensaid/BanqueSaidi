@@ -15,6 +15,7 @@ import javax.ejb.Startup;
  *
  * @author marwen
  */
+@Startup
 @Singleton
 @LocalBean
 public class InitDB {
@@ -25,10 +26,10 @@ public class InitDB {
     @PostConstruct
     public void InitDB() {
         System.out.println("#### Base,de donnée générée  ###");
-        gc.creerBcpComptes();
+       // gc.creerBcpComptes();
         gc.creerBcpComptesCourant();
         gc.creerBcpComptesEpargnes();
-        gc.genererBcpOperations();
+        //gc.genererBcpOperations();
 
     }
 }

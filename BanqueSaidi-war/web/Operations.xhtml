@@ -5,9 +5,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-    <f:metadata>
-        <f:viewParam name="id" value="#{operationsBancairesMBean.idCompte}"/>
-    </f:metadata>
 
     <body>
 
@@ -44,38 +41,37 @@
 
             <ui:define name="content">
                 <p:panel id="panel" style="margin-bottom:10px;">  
-                <h1>Operations bancaires du compte No #{param.id}:</h1>
+                <h1>Operations bancaires:</h1>
                 <f:view>
                     <h:form>
                         <h1><h:outputText value="List"/></h1>
-                        <h:dataTable value="#{operationsBancairesMBean.operationsBancaires}" var="item">
-                            <h:column>
-                                <f:facet name="header"> 
-                                    <h:outputText value="Dateoperation"/>
-                                </f:facet>
-                                <h:outputText value="#{item.dateoperation}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                </h:outputText>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Description"/>
-                                </f:facet>
-                                <h:outputText value="#{item.description}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Montant"/>
-                                </f:facet>
-                                <h:outputText value="#{item.montant}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Id"/>
-                                </f:facet>
+                        <p:dataTable  id="cTable" value="#{operationBancaireMBean.modele}" var="item" paginator="true" rows="5" lazy="true"
+                                      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                                      rowsPerPageTemplate="5,10,15"
+                                      rowStyleClass="#{compteBean.colorow(item.solde)}"
+                                      emptyMessage="Aucun compte bancaire trouvé." >
+
+
+                            <p:column headerText="N° d'operation">                                                        
                                 <h:outputText value="#{item.id}"/>
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>                               
+
+                            <p:column headerText="Description">
+                                <h:outputText value="#{item.description}"/> 
+                            </p:column>
+
+                            <p:column headerText="Montant" sortBy="#{item.montant}">
+                                <h:outputText value="#{item.montant}">
+                                    <f:convertNumber currencySymbol="€" groupingUsed="#{true}" maxFractionDigits="2" type="currency"/>
+                                </h:outputText>                                             
+                            </p:column>
+
+                            <p:column headerText="Date">
+                                <h:outputText value="#{item.dateOperation}"/> 
+                            </p:column>
+                           
+
+                        </p:dataTable>
                     </h:form>
                 </f:view>
                 </p:panel>

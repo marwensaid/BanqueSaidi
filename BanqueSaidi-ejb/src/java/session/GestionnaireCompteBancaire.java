@@ -164,7 +164,7 @@ public class GestionnaireCompteBancaire {
         System.out.println("### End of Operation ###");
     }
 
-    private void creerOperationsComptes(Long id1, Long id2) {
+    public void creerOperationsComptes(Long id1, Long id2) {
         double rand = (int) (Math.random() * 1000 + 1);
         rand += ((int) (Math.random() * 2)) * 0.5;
         this.transferer(id1, id2, rand);

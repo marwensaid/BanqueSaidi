@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-
-    <body>
-        
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
         <ui:composition template="./TemplatePrincipal.xhtml">
             <ui:define name="top">
                 <p:toolbar style="background-color: #9999ff">  
@@ -45,18 +45,20 @@
                     <h:form id="form">
                         <p:panel id="panel" style="margin-bottom:10px;">  
 
-                            <p:messages id="messages" /> 
+                            <p:growl id="growl" showDetail="true" sticky="true" />  
                             <h:panelGrid columns="2">
 
                            
                 
-                    <h:outputLabel value="Compte à crediter"></h:outputLabel>
-                    <p:inputText value="#{compteBancaireMBean.idCompteACrediter}"></p:inputText>
+                    <h:outputLabel value="Compte source"></h:outputLabel>
+                    <p:inputText value="#{compteBancaireMBean.id1}"></p:inputText>
+                    <h:outputLabel value="Compte destination"></h:outputLabel>
+                    <p:inputText value="#{compteBancaireMBean.id2}"></p:inputText>
                     <h:outputLabel value="Montant : " for="montant"/>
-                    <p:spinner id="montant" value="#{compteBancaireMBean.montantACrediter}" prefix="€" 
+                    <p:spinner id="montant" value="#{compteBancaireMBean.montantTransfert}" prefix="€" 
                                            requiredMessage="Veuillez saisir le montant" required="true" min="0"/>  
                     
-                    <p:commandButton id="valider" value="Valider" update="form" action="#{compteBancaireMBean.crediterUnCompte()}" process="@form"  >
+                    <p:commandButton id="valider" value="Valider" update="form" action="#{compteBancaireMBean.transferer()}" process="@form"  >
                         <p:confirm header="Confirmation" message="Vous êtes sûr de votre opération?" icon="ui-icon-alert" />
                     </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
@@ -75,5 +77,6 @@
             </ui:define>
 
         </ui:composition>
-    </body>
+    </h:body>
 </html>
+

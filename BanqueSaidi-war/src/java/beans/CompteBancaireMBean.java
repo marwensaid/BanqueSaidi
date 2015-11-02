@@ -40,7 +40,16 @@ public class CompteBancaireMBean implements Serializable {
     private int id2;
     private double montantTransfert;
     private String message;
+    private List<CompteBancaire> listeDesComptes;
     private LazyDataModel<CompteBancaire> modele;
+
+    public List<CompteBancaire> getListeDesComptes() {
+        return listeDesComptes;
+    }
+
+    public void setListeDesComptes(List<CompteBancaire> listeDesComptes) {
+        this.listeDesComptes = listeDesComptes;
+    }
 
     /**
      * Creates a new instance of CompteBancaireMBean
@@ -271,14 +280,18 @@ public class CompteBancaireMBean implements Serializable {
     public void suppress() {
         gc.delete(this.compteBancaire);
     }
-
+    private void refreshListeDesComptes() {
+        listeDesComptes = gc.findAll();
+        System.out.println("On FAIT FINDALL");
+    }
     public void transferer() {
 
         try {
             gc.transferer(id1, id2, montantTransfert);
+            refreshListeDesComptes();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "operation reussie!!"));
         } catch (Exception e) {
-            message = "Transfert impossible, pas assez d'argent";
-            System.out.println("### PAS ASSEZ d'argent ###");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "pas assez d'argent!!"));
         }
     }
 

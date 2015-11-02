@@ -25,13 +25,13 @@
                 <p:slideMenu style="width: 170px">
                     <p:menuitem value="Accueil" outcome="index.xhtml" />
                     <p:submenu label="Gestion Compte">
-                        <p:menuitem value="Ajouter un client" outcome="ajoutClient.xhtml"/>
                         <p:menuitem value="Lister les comptes" outcome="listeComptes.xhtml"/>
                     </p:submenu>
                     <p:submenu label="Operations Compte">
                         <p:menuitem value="List des operations" outcome="Operations.xhtml"/>
                         <p:menuitem value="Debiter compte" outcome="debiter.xhtml"/>
                         <p:menuitem value="crebiter compte" outcome="crediter.xhtml"/>
+                        <p:menuitem value="transferer argent" outcome="Transferer.xhtml"/>
                     </p:submenu>
                     <p:separator />
                     <p:submenu label="Autres">   
@@ -79,18 +79,10 @@
                                 </h:outputText>                                             
                             </p:column>
 
-                            <p:column headerText="Historique">
-                                <p:commandButton action="#{compteBancaireMBean.detailCompte(item)}" icon="ui-icon-search"/>                                  
-                            </p:column>
-
-                            <p:column headerText="Opérations">
-                                <p:commandButton action="#{compteBancaireMBean.operationBancaire(item)}" icon="ui-icon-pencil"/>                                  
-                            </p:column>
-
                             <p:column headerText="Suppression" style="width: 20px">
                                 <p:commandLink oncomplete="deleteDlg.show();">
                                     <h:panelGroup styleClass="ui-icon ui-icon-trash" />
-                                    <f:setPropertyActionListener value="#{item}" target="#{compteBancaireMBean.compteBancaire}" />
+                                    <f:setPropertyActionListener value="#{item}" target="#{compteBancaireMBean.suppression}" />
                                 </p:commandLink>                 
                             </p:column>      
 

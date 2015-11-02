@@ -206,4 +206,12 @@ public class GestionnaireCompteBancaire {
         Query q = this.em.createQuery(r);
         return ((Long) q.getSingleResult()).intValue();
     }
+    public void appliquerTaux() {
+        String r = "select c from CompteEpargne c";
+        Query q = this.em.createQuery(r);
+        List<CompteEpargne> comptes =  q.getResultList();
+        for(CompteEpargne c :comptes){
+           c.appliquerTaux();
+        }
+        }
 }

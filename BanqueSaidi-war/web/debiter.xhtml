@@ -56,7 +56,7 @@
                     <p:spinner id="montant" value="#{compteBancaireMBean.montantADebiter}" prefix="€" 
                                            requiredMessage="Veuillez saisir le montant" required="true" min="0"/>  
                     
-                    <p:commandButton id="valider" value="Valider" update="form" action="#{compteBancaireMBean.debiterUnCompte()}" process="@form"  >
+                    <p:commandButton id="valider" value="Valider" update="form" actionListener="#{compteBancaireMBean.debiterUnCompte()}" process="@form"  >
                         <p:confirm header="Confirmation" message="Vous êtes sûr de votre opération?" icon="ui-icon-alert" />
                     </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
@@ -66,10 +66,6 @@
                             </h:panelGrid>
                         </p:panel>
 
-                        
-                            
-                         
-                        
                     </h:form>
                 </f:view>
             </ui:define>

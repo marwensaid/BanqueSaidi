@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.SessionScoped;
+
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.model.LazyDataModel;
@@ -31,12 +32,12 @@ public class CompteBancaireMBean implements Serializable {
     private GestionnaireCompteBancaire gc;
     private CompteBancaire compteBancaire;
     private List<CompteBancaire> listCompteBancaire;
-    private Long idCompteACrediter;
+    private int idCompteACrediter;
     private double montantACrediter;
-    private Long idCompteADebiter;
+    private int idCompteADebiter;
     private double montantADebiter;
-    private Long id1;
-    private Long id2;
+    private int id1;
+    private int id2;
     private double montantTransfert;
     private String message;
     private LazyDataModel<CompteBancaire> modele;
@@ -103,7 +104,7 @@ public class CompteBancaireMBean implements Serializable {
      *
      * @return the value of id2
      */
-    public Long getId2() {
+    public int getId2() {
         return id2;
     }
 
@@ -112,7 +113,7 @@ public class CompteBancaireMBean implements Serializable {
      *
      * @param id2 new value of id2
      */
-    public void setId2(Long id2) {
+    public void setId2(int id2) {
         this.id2 = id2;
     }
 
@@ -139,7 +140,7 @@ public class CompteBancaireMBean implements Serializable {
      *
      * @return the value of id1
      */
-    public Long getId1() {
+    public int getId1() {
         return id1;
     }
 
@@ -148,7 +149,7 @@ public class CompteBancaireMBean implements Serializable {
      *
      * @param id1 new value of id1
      */
-    public void setId1(Long id1) {
+    public void setId1(int id1) {
         this.id1 = id1;
     }
 
@@ -175,7 +176,7 @@ public class CompteBancaireMBean implements Serializable {
      *
      * @return the value of idCompteADebiter
      */
-    public Long getIdCompteADebiter() {
+    public int getIdCompteADebiter() {
         return idCompteADebiter;
     }
 
@@ -184,7 +185,7 @@ public class CompteBancaireMBean implements Serializable {
      *
      * @param idCompteADebiter new value of idCompteADebiter
      */
-    public void setIdCompteADebiter(Long idCompteADebiter) {
+    public void setIdCompteADebiter(int idCompteADebiter) {
         this.idCompteADebiter = idCompteADebiter;
     }
 
@@ -211,7 +212,7 @@ public class CompteBancaireMBean implements Serializable {
      *
      * @return the value of idCompteACrediter
      */
-    public Long getIdCompteACrediter() {
+    public int getIdCompteACrediter() {
         return idCompteACrediter;
     }
 
@@ -220,7 +221,7 @@ public class CompteBancaireMBean implements Serializable {
      *
      * @param idCompteACrediter new value of idCompteACrediter
      */
-    public void setIdCompteACrediter(Long idCompteACrediter) {
+    public void setIdCompteACrediter(int idCompteACrediter) {
         this.idCompteACrediter = idCompteACrediter;
     }
 

@@ -53,21 +53,21 @@ public class GestionnaireCompteBancaire {
         return q.getResultList();
     }
 
-    public void crediterUnCompte(Long id, double montant) {
+    public void crediterUnCompte(int id, double montant) {
         // On va chercher un compte dans la base, il est connecté
         CompteBancaire c = em.find(CompteBancaire.class, id);
         // On update juste en faisant solde+=montant
         c.crediter(montant);
     }
 
-    public void debiterUnCompte(Long id, double montant) {
+    public void debiterUnCompte(int id, double montant) {
         // On va chercher un compte dans la base, il est connecté
         CompteBancaire c = em.find(CompteBancaire.class, id);
         // On update juste en faisant solde-=montant
         c.debiter(montant);
     }
 
-    public void transferer(long id1, Long id2, double montant) {
+    public void transferer(int id1, int id2, double montant) {
         debiterUnCompte(id1, montant);
         crediterUnCompte(id2, montant);
     }
@@ -158,13 +158,13 @@ public class GestionnaireCompteBancaire {
             while (indice1 == indice2) {
                 indice2 = (int) (Math.random() * nbCompte) + 1;
             }
-            this.creerOperationsComptes(new Long(indice1), new Long(indice2));
+            this.creerOperationsComptes( indice1,  indice2);
         }
         System.out.println("### Opérations créées ###");
         System.out.println("### End of Operation ###");
     }
 
-    public void creerOperationsComptes(Long id1, Long id2) {
+    public void creerOperationsComptes(int id1, int id2) {
         double rand = (int) (Math.random() * 1000 + 1);
         rand += ((int) (Math.random() * 2)) * 0.5;
         this.transferer(id1, id2, rand);

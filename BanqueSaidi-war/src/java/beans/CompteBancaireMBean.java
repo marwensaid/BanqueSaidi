@@ -238,15 +238,24 @@ public class CompteBancaireMBean implements Serializable {
     }
 
     public void crediterUnCompte() {
-        gc.crediterUnCompte(idCompteACrediter, montantACrediter);
+        try {
+            gc.crediterUnCompte(idCompteACrediter, montantACrediter);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "votre compte a ete credite avec succes!!"));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Operation non effectuée"));
+        }
+        
     }
- public void addMessage(String summary, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
+ 
     public void debiterUnCompte() {
-        gc.debiterUnCompte(idCompteADebiter, montantADebiter);
-        addMessage("Confirmation", "Les comptes sont créer avec succes");
+        try {
+            gc.debiterUnCompte(idCompteADebiter, montantADebiter);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "votre compte a ete debite avec succes!!"));
+        } catch (Exception e) {
+        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Operation non effectuée"));
+        }
+        
     }
 
     public String suppression() {

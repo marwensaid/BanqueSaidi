@@ -11,13 +11,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author marwen
  */
 @Entity
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Operations.count", query = "SELECT count(o) FROM OperationBancaire o "),
+    @NamedQuery(name = "Operations.findAll", query = "SELECT o FROM OperationBancaire o order by o.id ASC")
+
+})
 public class OperationBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;

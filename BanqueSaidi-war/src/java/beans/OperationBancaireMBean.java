@@ -8,13 +8,20 @@ package beans;
 import entities.CompteBancaire;
 import entities.OperationBancaire;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
+import org.primefaces.model.SortOrder;
 import session.GestionnaireCompteBancaire;
+import session.GestionnaireOperations;
 
 
 /**
@@ -25,6 +32,9 @@ import session.GestionnaireCompteBancaire;
 @RequestScoped
 public class OperationBancaireMBean implements Serializable{
 
+
+    @EJB
+    private GestionnaireOperations go;
     @EJB
     private GestionnaireCompteBancaire gc;
     private int idCompte;
@@ -38,12 +48,12 @@ public class OperationBancaireMBean implements Serializable{
         this.modele = modele;
     }
 
-    public GestionnaireCompteBancaire getGc() {
-        return gc;
+    public GestionnaireOperations getGc() {
+        return go;
     }
 
-    public void setGc(GestionnaireCompteBancaire gc) {
-        this.gc = gc;
+    public void setGc(GestionnaireOperations gc) {
+        this.go = go;
     }
 
     public int getIdCompte() {
@@ -62,6 +72,21 @@ public class OperationBancaireMBean implements Serializable{
      */
     public OperationBancaireMBean() {
         System.out.println("NEW OperationsBancairesMBean");
+        modele = new LazyDataModel<OperationBancaire>() {
+
+            @Override
+            public List load(int i, int i1, String string, SortOrder so, Map map) {
+                List<OperationBancaire> operations = new ArrayList<OperationBancaire>();
+                operations = go.getLazyOperations(i, i1);
+                return operations;
+            }
+
+            @Override
+            public int getRowCount() {
+                return go.getNBOperations(); //To change body of generated methods, choose Tools | Templates.
+            }
+
+        };
         
 
     }
@@ -69,5 +94,5 @@ public class OperationBancaireMBean implements Serializable{
     public List<OperationBancaire> getOperationsBancaires() {
         return gc.getOperationsBancaires(idCompte);
     }
-
+    
 }

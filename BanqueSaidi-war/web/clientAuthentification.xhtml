@@ -19,25 +19,7 @@
             </ui:define>
             
             <ui:define name="left">
-                <h:form>
-                    <h1>Menu principal</h1>
-                    <p:separator />
-                <p:slideMenu style="width: 170px">
-                    <p:menuitem value="Accueil" outcome="index.xhtml" />
-                    <p:submenu label="Gestion Compte">
-                        <p:menuitem value="Ajouter un client" outcome="ajoutClient.xhtml"/>
-                        <p:menuitem value="Lister les comptes" outcome="listeComptes.xhtml"/>
-                    </p:submenu>
-                    <p:submenu label="Operations Compte">
-                        <p:menuitem value="List des operations" outcome="Operations.xhtml"/>
-                        <p:menuitem value="Debiter compte" outcome="debiter.xhtml"/>
-                        <p:menuitem value="crebiter compte" outcome="crediter.xhtml"/>
-                    </p:submenu>
-                    <p:separator />
-                    <p:submenu label="Autres">   
-                    </p:submenu>
-                </p:slideMenu>
-                </h:form>
+                
             </ui:define>
                 
     <ui:define name="content">
@@ -58,7 +40,7 @@
                     <p:message for="pwd" id="pwd" display="icon">
                     </p:message>
                 </h:panelGrid>
-                <p:commandButton id="submitButton" value="sign in" update="panel" actionListener="#{ClientAuthenticationMBean.connecte}" icon="ui-icon-check"/>
+                <p:commandButton id="submitButton" value="sign in" update="panel" action="faces/index.xhtml" icon="ui-icon-check"/>
             </p:panel>
         </h:form>
 
